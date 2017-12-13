@@ -18,7 +18,7 @@
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <java.version>1.8</java.version>
         <jackson.version>2.6.3</jackson.version>
-        <finix.version>1.1.0</finix.version>
+        <finix.version>1.0.0</finix.version>
     </properties>
 
     <parent>
