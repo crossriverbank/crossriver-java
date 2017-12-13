@@ -1,0 +1,35 @@
+---
+general:
+  branches:
+    ignore:
+      - /release.*/
+machine:
+  java:
+    version: oraclejdk8
+  environment:
+    PROCESSING_URL: https://api.sandbox.crb.finixpayments.com
+dependencies:
+  pre:
+    # uncomment this after config GPG_KEY_PATH
+    #- gpg --yes --batch --import ${GPG_KEY_PATH}
+  override:
+    - mvn clean dependency:go-offline install -Dmaven.test.skip=true --fail-never --threads 5 -B
+test:
+  override:
+    - echo "Dont have tests"
+
+deployment:
+  snapshot:
+    branch: master
+    owner: crossriverbank
+    commands:
+      - mvn deploy -DskipTests=true -s settings.xml
+#  release:
+#    branch: staged
+#    owner: crossriverbank
+#    commands:
+#     - git config user.name "Deploybot"
+#     - git config user.email "support@crossriver.com"
+#     - git remote prune origin
+#     - git checkout master && git pull -a && git checkout staged
+#     - mvn --batch-mode -Dmaven.javadoc.skip=true -DautoVersionSubmodules=true -DallowSnapshots=true -DskipTests=true jgitflow:release-start jgitflow:release-finish

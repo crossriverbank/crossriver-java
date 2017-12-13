@@ -1,0 +1,217 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>io.crossriverbank.payments.processing.client</groupId>
+    <artifactId>crossriver-java</artifactId>
+    <version>1.0.0</version>
+    <packaging>jar</packaging>
+
+    <name>crossriver-java</name>
+    <description>Cross River API Java client.</description>
+    <url>https://www.crossriverbank.com/</url>
+
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+        <java.version>1.8</java.version>
+        <jackson.version>2.6.3</jackson.version>
+        <finix.version>1.1.0</finix.version>
+    </properties>
+
+    <parent>
+        <groupId>org.sonatype.oss</groupId>
+        <artifactId>oss-parent</artifactId>
+        <version>7</version>
+    </parent>
+
+    <dependencies>
+        <dependency>
+            <groupId>io.finix.payments.processing.client</groupId>
+            <artifactId>finix</artifactId>
+            <version>${finix.version}</version>
+        </dependency>
+
+        <!--Logging-->
+        <dependency>
+            <groupId>ch.qos.logback</groupId>
+            <artifactId>logback-classic</artifactId>
+            <version>1.1.3</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-api</artifactId>
+            <version>1.7.12</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>jcl-over-slf4j</artifactId>
+            <version>1.7.12</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>log4j-over-slf4j</artifactId>
+            <version>1.7.12</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.fasterxml.jackson.datatype</groupId>
+            <artifactId>jackson-datatype-jsr310</artifactId>
+            <version>${jackson.version}</version>
+        </dependency>
+
+        <!--Spring fw-->
+        <dependency>
+            <groupId>org.springframework.hateoas</groupId>
+            <artifactId>spring-hateoas</artifactId>
+            <version>0.19.0.RELEASE</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.plugin</groupId>
+            <artifactId>spring-plugin-core</artifactId>
+            <version>1.2.0.RELEASE</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.jayway.jsonpath</groupId>
+            <artifactId>json-path</artifactId>
+            <version>2.1.0</version>
+        </dependency>
+
+    </dependencies>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.3</version>
+                <configuration>
+                    <source>${java.version}</source>
+                    <target>${java.version}</target>
+                </configuration>
+            </plugin>
+
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <version>2.18.1</version>
+                <configuration>
+                    <printSummary>true</printSummary>
+                    <redirectTestOutputToFile>true</redirectTestOutputToFile>
+                    <argLine>-Xmx1G</argLine>
+                </configuration>
+            </plugin>
+
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-shade-plugin</artifactId>
+                <version>2.4.3</version>
+                <configuration>
+                    <artifactSet>
+                        <includes>
+                            <include>io.finix.*:*</include>
+                        </includes>
+                        <excludes>
+                            <exclude>!io.finix.*:*:*:*</exclude>
+                        </excludes>
+                    </artifactSet>
+                    <createDependencyReducedPom>true</createDependencyReducedPom>
+                    <relocations>
+                        <relocation>
+                            <pattern>io.finix.payments.processing.client</pattern>
+                            <shadedPattern>io.crossriverbank.payments.processing.client</shadedPattern>
+                        </relocation>
+                    </relocations>
+                    <!--<transformers>-->
+                        <!--<transformer-->
+                            <!--implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer"/>-->
+                    <!--</transformers>-->
+                    <filters>
+                        <filter>
+                            <artifact>io.finix.*:*</artifact>
+                            <excludes>
+                                <exclude>META-INF/**</exclude>
+                            </excludes>
+                        </filter>
+                    </filters>
+                </configuration>
+                <executions>
+                    <execution>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>shade</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
+
+
+    <licenses>
+        <license>
+            <name>AGPL</name>
+            <url>http://www.affero.org/oagpl.html</url>
+            <distribution>repo</distribution>
+        </license>
+    </licenses>
+
+    <scm>
+        <url>git@github.com:crossriverbank/crossriver-java.git</url>
+        <connection>scm:git:git@github.com:crossriverbank/crossriver-java.git</connection>
+        <developerConnection>scm:git:github.com:crossriverbank/crossriver-java.git
+        </developerConnection>
+        <tag>HEAD</tag>
+    </scm>
+
+    <developers>
+        <developer>
+            <id>support</id>
+            <name>Cross River Bank</name>
+            <email>support@crossriverbank.com</email>
+            <organization>Cross River Bank</organization>
+            <organizationUrl>https://www.crossriverbank.com/</organizationUrl>
+            <timezone>-7</timezone>
+        </developer>
+    </developers>
+
+    <repositories>
+        <repository>
+            <id>ossrh</id>
+            <url>https://oss.sonatype.org/content/repositories/</url>
+            <snapshots>
+                <enabled>true</enabled>
+            </snapshots>
+        </repository>
+
+        <repository>
+            <id>oss-snapshots</id>
+            <url>https://oss.sonatype.org/content/repositories/snapshots</url>
+            <snapshots>
+                <enabled>true</enabled>
+            </snapshots>
+        </repository>
+    </repositories>
+
+    <distributionManagement>
+        <repository>
+            <id>ossrh</id>
+            <url>https://oss.sonatype.org/content/repositories/</url>
+        </repository>
+        <snapshotRepository>
+            <id>ossrh</id>
+            <url>https://oss.sonatype.org/content/repositories/snapshots</url>
+        </snapshotRepository>
+    </distributionManagement>
+
+    <issueManagement>
+        <url>https://github.com/crossriverbank/crossriver-java/issues</url>
+        <system>GitHub Issues</system>
+    </issueManagement>
+</project>
