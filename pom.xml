@@ -4,7 +4,7 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>io.crossriverbank.payments.processing.client</groupId>
+    <groupId>io.github.crossriverbank.payments.processing.client</groupId>
     <artifactId>crossriver-java</artifactId>
     <version>1.0.0</version>
     <packaging>jar</packaging>
@@ -125,7 +125,7 @@
                     <relocations>
                         <relocation>
                             <pattern>io.finix.payments.processing.client</pattern>
-                            <shadedPattern>io.crossriverbank.payments.processing.client</shadedPattern>
+                            <shadedPattern>io.github.crossriverbank.payments.processing.client</shadedPattern>
                         </relocation>
                     </relocations>
                     <!--<transformers>-->
