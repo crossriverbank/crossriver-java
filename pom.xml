@@ -110,6 +110,15 @@
 
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-release-plugin</artifactId>
+                <version>2.5.3</version>
+                <configuration>
+                    <tagNameFormat>v@{project.version}</tagNameFormat>
+                </configuration>
+            </plugin>
+
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-shade-plugin</artifactId>
                 <version>2.4.3</version>
                 <configuration>
@@ -165,8 +174,7 @@
     <scm>
         <url>git@github.com:crossriverbank/crossriver-java.git</url>
         <connection>scm:git:git@github.com:crossriverbank/crossriver-java.git</connection>
-        <developerConnection>scm:git:github.com:crossriverbank/crossriver-java.git
-        </developerConnection>
+        <developerConnection>scm:git:github.com:crossriverbank/crossriver-java.git</developerConnection>
         <tag>HEAD</tag>
     </scm>
 
