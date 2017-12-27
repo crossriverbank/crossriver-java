@@ -23,4 +23,4 @@ deployment:
     branch: master
     owner: crossriverbank
     commands:
-      - mvn deploy -DskipTests=true -s settings.xml
+      - mvn deploy -DskipTests=true -Dgpg.skip -s settings.xml
