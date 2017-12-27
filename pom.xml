@@ -6,9 +6,8 @@
 
     <groupId>io.github.crossriverbank.payments.processing.client</groupId>
     <artifactId>crossriver-java</artifactId>
-    <version>1.0.0-SNAPSHOT</version>
+    <version>1.0.3</version>
     <packaging>jar</packaging>
-
     <name>crossriver-java</name>
     <description>Cross River API Java client.</description>
     <url>https://www.crossriverbank.com/</url>
@@ -18,7 +17,7 @@
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <java.version>1.8</java.version>
         <jackson.version>2.6.3</jackson.version>
-        <finix.version>1.0.0-SNAPSHOT</finix.version>
+        <finix.version>[1.0.0,2.0.0)</finix.version>
     </properties>
 
     <parent>
@@ -110,6 +109,61 @@
 
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-source-plugin</artifactId>
+                <version>2.2.1</version>
+                <executions>
+                    <execution>
+                        <id>attach-sources</id>
+                        <goals>
+                            <goal>jar-no-fork</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-javadoc-plugin</artifactId>
+                <version>2.9.1</version>
+                <executions>
+                    <execution>
+                        <id>attach-javadocs</id>
+                        <goals>
+                            <goal>jar</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-gpg-plugin</artifactId>
+                <version>1.6</version>
+                <executions>
+                    <execution>
+                        <id>sign-artifacts</id>
+                        <phase>verify</phase>
+                        <goals>
+                            <goal>sign</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+
+            <plugin>
+                <groupId>org.sonatype.plugins</groupId>
+                <artifactId>nexus-staging-maven-plugin</artifactId>
+                <version>1.6.7</version>
+                <extensions>true</extensions>
+                <configuration>
+                    <serverId>ossrh</serverId>
+                    <nexusUrl>https://oss.sonatype.org/</nexusUrl>
+                    <autoReleaseAfterClose>true</autoReleaseAfterClose>
+                </configuration>
+            </plugin>
+
+
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-release-plugin</artifactId>
                 <version>2.5.3</version>
                 <configuration>
@@ -133,8 +187,8 @@
                     <createDependencyReducedPom>true</createDependencyReducedPom>
                     <relocations>
                         <relocation>
-                            <pattern>io.finix.payments.processing.client</pattern>
-                            <shadedPattern>io.github.crossriverbank.payments.processing.client</shadedPattern>
+                            <pattern>io.finix.payments</pattern>
+                            <shadedPattern>io.crb.payments</shadedPattern>
                         </relocation>
                     </relocations>
                     <!--<transformers>-->
