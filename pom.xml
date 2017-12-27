@@ -6,7 +6,7 @@
 
     <groupId>io.github.crossriverbank.payments.processing.client</groupId>
     <artifactId>crossriver-java</artifactId>
-    <version>1.0.1</version>
+    <version>1.0.2</version>
     <packaging>jar</packaging>
     <name>crossriver-java</name>
     <description>Cross River API Java client.</description>
@@ -187,8 +187,8 @@
                     <createDependencyReducedPom>true</createDependencyReducedPom>
                     <relocations>
                         <relocation>
-                            <pattern>io.finix.payments.processing.client</pattern>
-                            <shadedPattern>io.crbpay.payments.processing.client</shadedPattern>
+                            <pattern>io.finix.payments</pattern>
+                            <shadedPattern>io.crbpay.payments</shadedPattern>
                         </relocation>
                     </relocations>
                     <!--<transformers>-->
