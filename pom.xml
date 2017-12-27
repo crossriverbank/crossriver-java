@@ -6,9 +6,8 @@
 
     <groupId>io.github.crossriverbank.payments.processing.client</groupId>
     <artifactId>crossriver-java</artifactId>
-    <version>1.0.0</version>
+    <version>1.0.1</version>
     <packaging>jar</packaging>
-
     <name>crossriver-java</name>
     <description>Cross River API Java client.</description>
     <url>https://www.crossriverbank.com/</url>
@@ -18,7 +17,7 @@
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <java.version>1.8</java.version>
         <jackson.version>2.6.3</jackson.version>
-        <finix.version>1.0.0-SNAPSHOT</finix.version>
+        <finix.version>[1.0.0,2.0.0)</finix.version>
     </properties>
 
     <parent>
@@ -138,7 +137,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-gpg-plugin</artifactId>
-                <version>1.5</version>
+                <version>1.6</version>
                 <executions>
                     <execution>
                         <id>sign-artifacts</id>
@@ -189,7 +188,7 @@
                     <relocations>
                         <relocation>
                             <pattern>io.finix.payments.processing.client</pattern>
-                            <shadedPattern>io.github.crossriverbank.payments.processing.client</shadedPattern>
+                            <shadedPattern>io.crbpay.payments.processing.client</shadedPattern>
                         </relocation>
                     </relocations>
                     <!--<transformers>-->
